@@ -19,7 +19,7 @@ X1 = [18.4	18.37	18
 20.3	20.32	20
 17.3	17.27	17]; 
 
-Xanova_Hugo=X2(:,2);
+Xanova_Hugo=X1(:,2);
 
 S1=std(X1); 
 M1=mean(X1);
@@ -110,7 +110,7 @@ Cpc=(3*S2)./(6.*sigma_instr);
 
 
 % Nouvelles mesures, faites a la fin de la seance du 16
-%Hugo %Ruben
+    %Hugo %Ruben
 X3=[18.39	18.38
     11.65	11.65
     23.24	23.24
@@ -129,6 +129,27 @@ X3=[18.39	18.38
 
 sigma_X3=std(X3); 
 
-X_anova=[
+%% Creation matrice anova
+for j=1:2
+    if j==1
+        for i=1:15
+            Xanova(2*i-1,j)=Xanova_Hugo(i);
+            Xanova(2*i,j)=X3(i,j);
+        end
 
+    end   
+    if j==2
+     for i=1:15
+            Xanova(2*i-1,j)=Xanova_Ruben(i);
+            Xanova(2*i,j)=X3(i,j);
+     end
+    end
+end 
 
+anova2(Xanova,2)
+%                     
+% Operateur         0       1    0.0001         2.13   0.1548
+% Piece          998.099   14   71.2928   1859812.38   0     
+% Interaction     0       14    0              0.27   0.9942
+% Error           0.001   30    0                           
+% Total         998.101   59                                
