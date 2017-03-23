@@ -22,7 +22,7 @@ X1 = [18.4	18.37	18
 S1=std(X1); 
 M1=mean(X1);
 
-M1>3*S1 %test repetabilite
+M1>3*S1; %test repetabilite
 %okay
 
 %X2 Ruben
@@ -45,7 +45,7 @@ X2=[18.4	18.38	18
 
 M2=mean(X2);
 S2=std(X2);
-M2>3*S2 %test repetabilite
+M2>3*S2; %test repetabilite
 %okay
 
 %% Methode R&R
@@ -70,28 +70,35 @@ Moy_ecart=mean(abs(Ecart));
 
 % Coeff * R  pour voir la validite des mesures 
 % Coeff pour 2 op?rateur D4=3.27
-Val_mesures = 3.27*Moy_ecart; %si Validite_mesures>Ecart --> pas valide
-L=length(Ecart(:,1);
-C=length(Ecart(1,:);
-for i=1:L
-    for j=1:C
-        
+Valide_mesures = 3.27*Moy_ecart; %si Validite_mesures>Ecart --> pas valide
+
+%pour trouver les valeurs non valides
+L=length(Ecart(:,1));
+C=length(Ecart(1,:));
+for j=1:C
+    for i=1:L
+        if abs(Ecart(i,j))>Valide_mesures(j)
+            indices=[i j];
+            disp(indices)
+            
+        end
     end 
 end 
 
 %Points aberrants pour les boulettes 4 et 6 sur la balance 3
 
 %Matrice sans point aberrant 
-Ecart_1=Ecart(:,1); 
+Ecart_1=[Ecart(1,1) ; Ecart(6:end,1)]; 
 Ecart_2=Ecart(:,2); 
 Ecart_3=[Ecart(1:3,3)
         Ecart(5,3)
         Ecart(7:end,3)]; 
 
-sigma_instr_1=mean(Ecart_1)/1.15;
+sigma_instr_1=mean(Ecart_1)/1.15; %coefficient d a revoir 
+sigma_instr_2=mean(Ecart_2)/1.15;
 sigma_instr_3=mean(Ecart_3)/1.153;
 
-sigma_instr=[sigma_instr_12 sigma_instr_3];
+sigma_instr=[sigma_instr_1 sigma_instr_2 sigma_instr_3];
 
 %% calcul de Cpc
 %sigma_new=sigma(
