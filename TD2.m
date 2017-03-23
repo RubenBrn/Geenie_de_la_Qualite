@@ -1,7 +1,7 @@
 clc
 clear all 
 close all 
-format short 
+
 
 %X1 Hugo
 X1 = [18.4	18.37	18
@@ -106,45 +106,47 @@ sigma_instr_3=mean(Ecart_3)/1.153;
 sigma_instr=[sigma_instr_1 sigma_instr_2 sigma_instr_3];
 
 %% calcul de Cpc
-%sigma_new=sigma(
+
 Cpc=(3*S2)./(6.*sigma_instr);
 
+%% Methode ANOVA2 
+
+%premieres mesures --> seulement pour la bonne balance
+Xanova1=[Xanova_Hugo Xanova_Ruben]; 
 
 % Nouvelles mesures, faites a la fin de la seance du 16
-Xanova1=[Xanova_Hugo Xanova_Ruben];
     %Hugo %Ruben
 Xanova2=[18.39	18.38
-    11.65	11.65
-    23.24	23.24
-    21.51	21.50
-    20.41	20.41
-    14.35	14.35
-    10.38	10.39
-    17.67	17.67
-    11.92	11.92
-    15.82	15.82
-    21.9	21.9
-    11.11	11.10
-    17.25	17.25
-    20.32	20.32
-    17.27	17.27] ; 
+        11.65	11.65
+        23.24	23.24
+        21.51	21.50
+        20.41	20.41
+        14.35	14.35
+        10.38	10.39
+        17.67	17.67
+        11.92	11.92
+        15.82	15.82
+        21.9	21.9
+        11.11	11.10
+        17.25	17.25
+        20.32	20.32
+        17.27	17.27] ; 
 
-sigma_X3=std(Xanova2); 
 
 %% Creation matrice anova
-for j=1:2
+
+for j=1:2 %colonne 1 --> Hugo, colonne 2 --> Ruben
         for i=1:15
-            Xanova(2*i-1,j)=Xanova1(i,j);
-            Xanova(2*i,j)=Xanova2(i,j);
+            Xanova(2*i-1,j)=Xanova1(i,j); %les lignes impaires sont la matrice des premieres manip
+            Xanova(2*i,j)=Xanova2(i,j); %les lignes impaires sont la matrice des premieres manip
  
         end
 end 
 
-
-rep=anova2(Xanova,2)
+[rep,tbl]=anova2(Xanova,2)
 %                     
 % Operateur         0       1    0.0001         2.13   0.1548
 % Piece          998.099   14   71.2928   1859812.38   0     
 % Interaction     0       14    0              0.27   0.9942
 % Error           0.001   30    0                           
-% Total         998.101   59                                
+% Total         998.101   59         
