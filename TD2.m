@@ -1,23 +1,24 @@
 clc
 clear all 
 close all 
+format short 
 
 %X1 Hugo
 X1 = [18.4	18.37	18
-11.6	11.64	12
-23.3	23.24	23
-21.5	21.49	21
-20.5	20.42	20
-14.4	14.35	15
-10.4	10.39	10
-17.7	17.67	18
-11.9	11.92	12
-15.8	15.83	16
-21.9	21.9	22
-11.1	11.1	11
-17.3	17.25	17
-20.3	20.32	20
-17.3	17.27	17]; 
+    11.6	11.64	12
+    23.3	23.24	23
+    21.5	21.49	21
+    20.5	20.42	20
+    14.4	14.35	15
+    10.4	10.39	10
+    17.7	17.67	18
+    11.9	11.92	12
+    15.8	15.83	16
+    21.9	21.9	22
+    11.1	11.1	11
+    17.3	17.25	17
+    20.3	20.32	20
+    17.3	17.27	17]; 
 
 Xanova_Hugo=X1(:,2);
 
@@ -83,7 +84,7 @@ for j=1:C
     for i=1:L
         if abs(Ecart(i,j))>Valide_mesures(j)
             indices=[i j];
-            disp(indices)
+            disp(indices);
             
         end
     end 
@@ -110,11 +111,12 @@ Cpc=(3*S2)./(6.*sigma_instr);
 
 
 % Nouvelles mesures, faites a la fin de la seance du 16
+Xanova1=[Xanova_Hugo Xanova_Ruben];
     %Hugo %Ruben
-X3=[18.39	18.38
+Xanova2=[18.39	18.38
     11.65	11.65
     23.24	23.24
-    21.51	21.5
+    21.51	21.50
     20.41	20.41
     14.35	14.35
     10.38	10.39
@@ -127,26 +129,19 @@ X3=[18.39	18.38
     20.32	20.32
     17.27	17.27] ; 
 
-sigma_X3=std(X3); 
+sigma_X3=std(Xanova2); 
 
 %% Creation matrice anova
 for j=1:2
-    if j==1
         for i=1:15
-            Xanova(2*i-1,j)=Xanova_Hugo(i);
-            Xanova(2*i,j)=X3(i,j);
+            Xanova(2*i-1,j)=Xanova1(i,j);
+            Xanova(2*i,j)=Xanova2(i,j);
+ 
         end
-
-    end   
-    if j==2
-     for i=1:15
-            Xanova(2*i-1,j)=Xanova_Ruben(i);
-            Xanova(2*i,j)=X3(i,j);
-     end
-    end
 end 
 
-anova2(Xanova,2)
+
+rep=anova2(Xanova,2)
 %                     
 % Operateur         0       1    0.0001         2.13   0.1548
 % Piece          998.099   14   71.2928   1859812.38   0     
