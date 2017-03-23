@@ -103,3 +103,6 @@ sigma_instr=[sigma_instr_1 sigma_instr_2 sigma_instr_3];
 %% calcul de Cpc
 %sigma_new=sigma(
 Cpc=(3*S2)./(6.*sigma_instr);
+
+
+%test hugo
