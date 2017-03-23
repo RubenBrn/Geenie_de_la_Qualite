@@ -70,14 +70,14 @@ Moy_ecart=mean(abs(Ecart));
 
 % Coeff * R  pour voir la validite des mesures 
 % Coeff pour 2 op?rateur D4=3.27
-Val_mesures = 3.27*Moy_ecart; %si Validite_mesures>Ecart --> pas valide
+Valide_mesures = 3.27*Moy_ecart; %si Validite_mesures>Ecart --> pas valide
 
 %pour trouver les valeurs non valides
 L=length(Ecart(:,1));
 C=length(Ecart(1,:));
 for j=1:C
     for i=1:L
-        if abs(Ecart(i,j))>Val_mesures(j)
+        if abs(Ecart(i,j))>Valide_mesures(j)
             indices=[i j];
             disp(indices)
             
