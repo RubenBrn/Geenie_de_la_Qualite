@@ -149,4 +149,15 @@ end
 % Piece          998.099   14   71.2928   1859812.38   0     
 % Interaction     0       14    0              0.27   0.9942
 % Error           0.001   30    0                           
-% Total         998.101   59         
+% Total         998.101   59     
+
+sigma_repetabilite = sqrt(3.8333e-05); 
+%calcul de bn 
+bn=(59+1)/(2);
+sigma_operateur=sqrt((8.1667e-05-1.0238e-05)/bn);
+
+
+%% TD3 
+
+
+
