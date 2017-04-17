@@ -24,7 +24,7 @@ Valeur_cible=masse_totale/nb;
 
 
 P1=[P1(1:6)
-    P1(8:end)]; %on retire la valeur 
+    P1(8:end)]; %on retire la valeur de la boulette 7, boulette de suivi 
 
 %% stade P1
 P = [P1];
@@ -32,7 +32,7 @@ P = [P1];
 S1_lt = std(P) ;
 S1 = std(P1); 
 M1 = mean(P1);
-IT = 14.2030 ; 
+IT = 5*max(S1); 
 TS = Valeur_cible+(IT/2) ;
 TM = Valeur_cible -(IT/2) ;
 
@@ -50,17 +50,17 @@ P = [P1 ; P2];
 S2_lt = std(P) ;
 S2 = std(P2); 
 M2 = mean(P2);
-IT = 14.2030 ; 
-TS = Valeur_cible+(IT/2) ;
-TM = Valeur_cible -(IT/2) ;
+IT2 = 5*max(S1, S2); 
+TS = Valeur_cible+(IT2/2) ;
+TM = Valeur_cible -(IT2/2) ;
 
-Pp2 = IT/(6*S2_lt)  % 
+Pp2 = IT2/(6*S2_lt)  % 
 Ppk2 = min((TS-M2)/ (3*S2_lt) , (M2-TM)/ (3*S2_lt))  % 
-Ppm2 = IT / (6*( (S2_lt^2 + (M2-Valeur_cible)^2 ))^0.5)  % 
+Ppm2 = IT2 / (6*( (S2_lt^2 + (M2-Valeur_cible)^2 ))^0.5)  % 
 Cpk2 = (TS-M2)/ (3*S2)  % 
-Cp2 = IT/ (6*S2) %  
+Cp2 = IT2/ (6*S2) %  
 
-Cpm2 = IT / (6*( (S2^2 + (M2-Valeur_cible)^2 ))^0.5)  %
+Cpm2 = IT2 / (6*( (S2^2 + (M2-Valeur_cible)^2 ))^0.5)  %
 
 %% stade P3
 P = [P1 ; P2 ; P3];
@@ -68,17 +68,17 @@ P = [P1 ; P2 ; P3];
 S3_lt = std(P) ;
 S3 = std(P3); 
 M3 = mean(P3);
-IT = 14.2030 ; 
-TS = Valeur_cible+(IT/2) ;
-TM = Valeur_cible -(IT/2) ;
+IT3 = 5*max([S1 S2 S3]);  
+TS = Valeur_cible+(IT3/2) ;
+TM = Valeur_cible -(IT3/2) ;
 
-Pp3 = IT/(6*S3_lt)  % 
+Pp3 = IT3/(6*S3_lt)  % 
 Ppk3 = min((TS-M3)/ (3*S3_lt) , (M3-TM)/ (3*S3_lt))  % 
-Ppm3 = IT / (6*( (S3_lt^2 + (M3-Valeur_cible)^2 ))^0.5)  % 
+Ppm3 = IT3 / (6*( (S3_lt^2 + (M3-Valeur_cible)^2 ))^0.5)  % 
 Cpk3 = (TS-M3)/ (3*S3)  % 
-Cp3 = IT/ (6*S3) %  
+Cp3 = IT3/ (6*S3) %  
 
-Cpm3 = IT / (6*( (S3^2 + (M3-Valeur_cible)^2 ))^0.5)  %
+Cpm3 = IT3 / (6*( (S3^2 + (M3-Valeur_cible)^2 ))^0.5)  %
 
 %% stade P4
 P = [P1 ; P2 ; P3 ; P4];
@@ -86,17 +86,17 @@ P = [P1 ; P2 ; P3 ; P4];
 S4_lt = std(P) ;
 S4 = std(P4); 
 M4 = mean(P4);
-IT = 14.2030 ; 
-TS = Valeur_cible+(IT/2) ;
-TM = Valeur_cible -(IT/2) ;
+IT4 = 5*max([S1 S2 S3 S4]); 
+TS = Valeur_cible+(IT4/2) ;
+TM = Valeur_cible -(IT4/2) ;
 
-Pp4 = IT/(6*S4_lt)  % 
+Pp4 = IT4/(6*S4_lt)  % 
 Ppk4 = min((TS-M4)/ (3*S4_lt) , (M4-TM)/ (3*S4_lt))  % 
-Ppm4 = IT / (6*( (S4_lt^2 + (M4-Valeur_cible)^2 ))^0.5)  % 
+Ppm4 = IT4 / (6*( (S4_lt^2 + (M4-Valeur_cible)^2 ))^0.5)  % 
 Cpk4 = (TS-M4)/ (3*S4)  % 
-Cp4 = IT/ (6*S4) %  
+Cp4 = IT4/ (6*S4) %  
 
-Cpm4 = IT / (6*( (S4^2 + (M4-Valeur_cible)^2 ))^0.5)  %
+Cpm4 = IT4 / (6*( (S4^2 + (M4-Valeur_cible)^2 ))^0.5)  %
 
 %% stade P5
 P = [P1 ; P2 ; P3 ; P4 ; P5];
@@ -104,14 +104,14 @@ P = [P1 ; P2 ; P3 ; P4 ; P5];
 S5_lt = std(P) ;
 S5 = std(P5); 
 M5 = mean(P5);
-IT = 14.2030 ; 
-TS = Valeur_cible+(IT/2) ;
-TM = Valeur_cible -(IT/2) ;
+IT5 = 5*max([S1 S2 S3 S4 S5]); 
+TS = Valeur_cible+(IT5/2) ;
+TM = Valeur_cible -(IT5/2) ;
 
-Pp5 = IT/(6*S5_lt)  % 
+Pp5 = IT5/(6*S5_lt)  % 
 Ppk5 = min((TS-M5)/ (3*S5_lt) , (M5-TM)/ (3*S5_lt))  % 
-Ppm5 = IT / (6*( (S5_lt^2 + (M5-Valeur_cible)^2 ))^0.5)  % 
+Ppm5 = IT5 / (6*( (S5_lt^2 + (M5-Valeur_cible)^2 ))^0.5)  % 
 Cpk5 = (TS-M5)/ (3*S5)  % 
-Cp5 = IT/ (6*S5) %  
+Cp5 = IT5/ (6*S5) %  
 
-Cpm5 = IT / (6*( (S5^2 + (M5-Valeur_cible)^2 ))^0.5)  %
+Cpm5 = IT5 / (6*( (S5^2 + (M5-Valeur_cible)^2 ))^0.5)  %
