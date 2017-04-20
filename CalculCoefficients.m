@@ -12,9 +12,9 @@ load P3.m
 load P4.m
 load P5.m 
 load P6.m
-%load P7.m
-%load P8.m
-%load P9.m
+load P7.m
+load P8.m
+load P9.m
 
 %dans les P sont stocke les valeurs de masses des diverses productions
 
