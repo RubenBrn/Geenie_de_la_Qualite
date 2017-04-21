@@ -123,4 +123,43 @@ Cp4=C4(end-2:end) ;
 %% ---------------------question 3 ----------------------------------------
 %% ---------------------question 4 ----------------------------------------
 Mesures = [Mesures_Run4  Mesures_Run3  Mesures_Run2  Mesures_Run1] ;
-%test_echantillon=reshape (Mesures,5,20)
+
+Echantillon = reshape(Mesures,5,20) ;
+
+ % Carte de controle EWMA
+l=length(Echantillon)
+cible=mean(Mesures_Run4);
+sigma=std(Mesures_Run4); %ecart type total
+lambda = 0.2;   % D'apr?s les tables 
+M(1) = cible; % Valeur de m0=cible
+L=3;   % limites +/- 3 sigma
+n=5;
+
+
+for i = 2:length(Echantillon) %nombre de mesures
+    M(i) = Echantillon(i-1)*lambda + (1-lambda)*M(i-1);
+end
+
+%Calcul de sigmaM(i)
+for i = 1:length(Echantillon)
+    sigmaM(i) = sigma * sqrt((lambda*(1-(1-lambda)^(2*i)))/(n*(2-lambda))) ;
+end
+ 
+ %Calculs des limites
+ 
+ for i = 1:length(Echantillon)
+     LSCM(i) = cible + L * sigmaM(i); %limite sup?rieure
+ end
+ 
+ for i = 1:length(Echantillon)
+     LICM(i) = cible - L * sigmaM(i); %limite inf?rieure
+ end
+ 
+figure(4)
+plot(1:l, M , 'r')
+hold on
+plot(1:l, LICM, '-b')
+plot(1:l, LSCM, '-b')
+hold off
+title ('CARTE DE CONTROLE EWMA')
+
