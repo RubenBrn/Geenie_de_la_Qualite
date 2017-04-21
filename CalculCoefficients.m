@@ -1,5 +1,5 @@
-%traitement P5 
-%production 1 amelioration masse - masse a vue d'oeil
+%traitement jusqu'a P9 
+
 clc 
 clear all 
 close all 
@@ -115,3 +115,94 @@ Cpk5 = (TS-M5)/ (3*S5)  %
 Cp5 = IT5/ (6*S5) %  
 
 Cpm5 = IT5 / (6*( (S5^2 + (M5-Valeur_cible)^2 ))^0.5)  %
+
+%% stade P6
+P = [P1 ; P2 ; P3 ; P4 ; P5 ; P6];
+
+S6_lt = std(P) ;
+S6 = std(P6); 
+M6 = mean(P6);
+IT6 = 5*max([S1 S2 S3 S4 S5 S6]); 
+TS = Valeur_cible+(IT6/2) ;
+TM = Valeur_cible -(IT6/2) ;
+
+Pp6 = IT6/(6*S6_lt)  % 
+Ppk6 = min((TS-M6)/ (3*S6_lt) , (M6-TM)/ (3*S6_lt))  % 
+Ppm6 = IT6 / (6*( (S6_lt^2 + (M6-Valeur_cible)^2 ))^0.5)  % 
+Cpk6 = (TS-M6)/ (3*S6)  % 
+Cp6 = IT6/ (6*S6) %  
+
+Cpm6 = IT6 / (6*( (S6^2 + (M6-Valeur_cible)^2 ))^0.5)  %
+
+%% stade P7
+P = [P1 ; P2 ; P3 ; P4 ; P5];
+
+S5_lt = std(P) ;
+S5 = std(P5); 
+M5 = mean(P5);
+IT5 = 5*max([S1 S2 S3 S4 S5]); 
+TS = Valeur_cible+(IT5/2) ;
+TM = Valeur_cible -(IT5/2) ;
+
+Pp5 = IT5/(6*S5_lt)  % 
+Ppk5 = min((TS-M5)/ (3*S5_lt) , (M5-TM)/ (3*S5_lt))  % 
+Ppm5 = IT5 / (6*( (S5_lt^2 + (M5-Valeur_cible)^2 ))^0.5)  % 
+Cpk5 = (TS-M5)/ (3*S5)  % 
+Cp5 = IT5/ (6*S5) %  
+
+Cpm5 = IT5 / (6*( (S5^2 + (M5-Valeur_cible)^2 ))^0.5)  %
+
+%% stade P8
+P = [P1 ; P2 ; P3 ; P4 ; P5];
+
+S5_lt = std(P) ;
+S5 = std(P5); 
+M5 = mean(P5);
+IT5 = 5*max([S1 S2 S3 S4 S5]); 
+TS = Valeur_cible+(IT5/2) ;
+TM = Valeur_cible -(IT5/2) ;
+
+Pp5 = IT5/(6*S5_lt)  % 
+Ppk5 = min((TS-M5)/ (3*S5_lt) , (M5-TM)/ (3*S5_lt))  % 
+Ppm5 = IT5 / (6*( (S5_lt^2 + (M5-Valeur_cible)^2 ))^0.5)  % 
+Cpk5 = (TS-M5)/ (3*S5)  % 
+Cp5 = IT5/ (6*S5) %  
+
+Cpm5 = IT5 / (6*( (S5^2 + (M5-Valeur_cible)^2 ))^0.5)  %
+
+%% stade P9
+P = [P1 ; P2 ; P3 ; P4 ; P5 ; P6 ; P7 ; P8 ; P9];
+
+S5_lt = std(P) ;
+S5 = std(P5); 
+M5 = mean(P5);
+IT5 = 5*max([S1 S2 S3 S4 S5]); 
+TS = Valeur_cible+(IT5/2) ;
+TM = Valeur_cible -(IT5/2) ;
+
+Pp5 = IT5/(6*S5_lt)  % 
+Ppk5 = min((TS-M5)/ (3*S5_lt) , (M5-TM)/ (3*S5_lt))  % 
+Ppm5 = IT5 / (6*( (S5_lt^2 + (M5-Valeur_cible)^2 ))^0.5)  % 
+Cpk5 = (TS-M5)/ (3*S5)  % 
+Cp5 = IT5/ (6*S5) %  
+
+Cpm5 = IT5 / (6*( (S5^2 + (M5-Valeur_cible)^2 ))^0.5)  %
+
+%% Traitement global 
+
+%Matrice finale 
+Donnees=[Cp1 Cpk1 Cpm1 Pp1 Ppk1 Ppm1;
+    Cp2 Cpk2 Cpm2 Pp2 Ppk2 Ppm2;
+    Cp3 Cpk3 Cpm3 Pp3 Ppk3 Ppm3;
+    Cp4 Cpk4 Cpm4 Pp4 Ppk4 Ppm4;
+    Cp5 Cpk5 Cpm5 Pp5 Ppk5 Ppm5;
+    Cp6 Cpk6 Cpm6 Pp6 Ppk6 Ppm6;
+    Cp7 Cpk7 Cpm7 Pp7 Ppk7 Ppm7;
+    Cp8 Cpk8 Cpm8 Pp8 Ppk8 Ppm8;
+    Cp9 Cpk9 Cpm9 Pp9 Ppk9 Ppm9];
+%pour nous, voir si on cheat pas trop 
+
+Ptraitement = [P1  P2  P3  P4  P5  P6  P7 P8  P9];
+for i=1:9
+    masse_production(i)= sum(Ptraitement(:,i));
+end 
