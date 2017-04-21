@@ -9,7 +9,7 @@ Mesure_Operateurs1 =[   4.0381    4.1130    4.0018    3.9962    4.1361    3.9592
                         4.0827    4.0233    3.9378    4.0453    3.8894    4.0196    4.0647    4.0170 
                         4.0739    4.0214    4.0513    4.0340    3.8948    3.9667    4.0980    3.9965 
                         4.0052    4.0480    3.8911    4.0278    3.9855    3.9248    3.9970    3.8483 ];
-boxplot(Mesure_Operateurs1)
+
 %--------------------------------------------------------------------------
 %% question 1 :
 IT= 1.2 ; 
@@ -29,15 +29,13 @@ Val_mesures=D4*Range;
 %si Val_mesures>Ecart --> valide
 %Ech : 1 2 3 4 5 6 7 8 
     %  ok pour tous 
-    % Pas de point aberrants 
     
-    
+% Pas de point aberrants 
 %d*4=2.082
 sigma_mesure=Range/2.082;
 Dispersion1=6*sigma_mesure; 
 
-Cpc=IT/Dispersion1; 
-% Cpc=3.18>3 Le processus de mesure est adapte pour les tolerances tres resserrees
+Cpc=IT/Dispersion1; % Le processus de mesure est adapte pour les tolerances tres resserrees
 
 %--------------------------------------------------------------------------
 %% Question 2 :
@@ -65,8 +63,8 @@ anova2(Mesure_Operateurs2,2);
 % 
 % [rep,tbl]=anova2(Xanova,2)
 
-%pieces       0.01951    7   0.00279   0.56   0.7839
-%operateurs    0.00963    3   0.00321   0.64   0.5932
+%operateur       0.01951    7   0.00279   0.56   0.7839
+%pieces          0.00963    3   0.00321   0.64   0.5932
 %Interaction   0.13198   21   0.00628   1.26   0.2727
 %residu         0.15982   32   0.00499                
 %Total         0.32093   63    
@@ -76,9 +74,9 @@ a=7+1;
 b=3+1;
 n=64/(a*b);
 MSR=0.00499; %residu
-MSO=0.00321; %operateurs
+MSO=0.00279; %operateurs
 MSOp=0.00628; % intercation
-MSp=0.00279; %piece
+MSp=0.00321; %piece
 
 sigma_repe=sqrt(MSR); 
 sigma_operateurs=sqrt((MSO-MSOp)/(b*n));
@@ -99,28 +97,27 @@ Mesures_Run2=[4.51 4.0436 4.1993 3.1416 3.6625 4.2278 3.3756 3.7812 3.6030 3.699
 Mesures_Run3= [4.5188 4.5672 3.788 4.2217 3.9125 3.9097 4.3017 4.0119 4.0462 3.8412 3.6232 4.1878 3.4011 4.4791 3.6603 4.3539 4.3391 3.5946 4.2780 3.7265 4.5399 4.5188 4.5672 3.788 4.2217];
 Mesures_Run4=[3.9338 3.885 3.945 4.5037 4.596 3.9139 3.8268 3.909 4.1215 4.3068 4.503 4.1248 3.5925 4.081 3.7514 3.8406 4.4186 4.6212 3.4935 4.0957 4.0306 3.5325 4.6778 4.2328 3.945];
 
+% 4 s?ries de mesures apr?s diff?rentes am?liorations de proc?d?
 
-%% ---------------------question 1----------------------------------------
+%---------------------question 1----------------------------------------
 Mesures = [Mesures_Run1  Mesures_Run2  Mesures_Run3  Mesures_Run4];
 
-jbtest(Mesures) 
+S1_lt = std(Mesures_Run1) ;
+S1 = std(Mesures_Run1); 
+M1 = mean(Mesures_Run1);
+IT = 5*max(S1); 
+TS = Valeur_cible+(IT/2) ;
+TM = Valeur_cible -(IT/2) ;
 
+Pp1 = IT/(6*S1_lt)  % 
+Ppk1 = min((TS-M1)/ (3*S1_lt) , (M1-TM)/ (3*S1_lt))  % 
+Ppm1 = IT / (6*( (S1_lt^2 + (M1-Valeur_cible)^2 ))^0.5)  % 
+Cpk1 = (TS-M1)/ (3*S1)  % 
+Cp1 = IT/ (6*S1) %  
 
-
-Valeur_cible=4;
-%calculs coeff courts-termes pour chaque serie
-    C1=f_CalculCoeff_C (Mesures_Run1, IT, Valeur_cible); 
-    C2=f_CalculCoeff_C(Mesures_Run2, IT, Valeur_cible);
-    C3=f_CalculCoeff_C(Mesures_Run3, IT, Valeur_cible);
-    C4=f_CalculCoeff_C(Mesures_Run4, IT, Valeur_cible);
-%Les coeff sont les 3 dernieres valeurs de C    
-Cp1=C1(end-2:end) ;   
-Cp2=C2(end-2:end) ; 
-Cp3=C3(end-2:end) ; 
-Cp4=C4(end-2:end) ; 
-
-%% ---------------------question 2 ----------------------------------------
-%% ---------------------question 3 ----------------------------------------
-%% ---------------------question 4 ----------------------------------------
+Cpm1 = IT / (6*( (S1^2 + (M1-Valeur_cible)^2 ))^0.5)  %
+%---------------------question 2 ----------------------------------------
+%---------------------question 3 ----------------------------------------
+%---------------------question 4 ----------------------------------------
 Mesures = [Mesures_Run4  Mesures_Run3  Mesures_Run2  Mesures_Run1] ;
 %test_echantillon=reshape (Mesures,5,20)
