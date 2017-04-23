@@ -138,15 +138,12 @@ Donnees=[Cp(1) Cpk(1) Cpm(1) Pp(1) Ppk(1) Ppm(1);
     Cp(9) Cpk(9) Cpm(9) Pp(9) Ppk(9) Ppm(9)];
 %pour nous, voir si on cheat pas trop 
 
-
+jbtest=
 
 Ptraitement = [P1  P2  P3  P4  P5  P6  P7 P8  P9];
 for i=1:9
     masse_production(i)= sum(Ptraitement(:,i));
-    jbtest(Ptraitement(:,i))
 end 
-
-boxplot(Ptraitement)
 
 %% Carte de Controle 
 %------------------------------------------------------------

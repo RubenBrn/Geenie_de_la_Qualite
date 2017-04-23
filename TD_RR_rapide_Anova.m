@@ -147,8 +147,8 @@ end
 %                     
 % Operateur         0       1    0.0001         2.13   0.1548
 % Piece          998.099   14   71.2928   1859812.38   0     
-% Interaction     0       14    0              0.27   0.9942
-% Error           0.001   30    0                           
+% Interaction     0       14    {1.023e-05}     0.27   0.9942
+% Error           0.001   30    {3.83e-05}                           
 % Total         998.101   59     
 
 sigma_repetabilite = sqrt(3.8333e-05); 
