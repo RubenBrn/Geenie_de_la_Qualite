@@ -19,7 +19,7 @@ load P9.m
 %dans les P sont stocke les valeurs de masses des diverses productions
 
 nb=14;
-masse_totale=142.4;
+masse_totale=242.86;
 Valeur_cible=masse_totale/nb;
 
 
@@ -62,7 +62,7 @@ P = [P1 ; P2 ; P3 ; P4];
 S4= std(P4);
 S4_lt = std(P) ;
 IT(4) = 5*max([S1 S2 S3 S4]);
-[S(4) M(4) TS(4) TM(4) Cp(4) Cpk(4) Cpm(4)]=f_CalculCoeff_CT(P(4), IT(4), Valeur_cible);
+[S(4) M(4) TS(4) TM(4) Cp(4) Cpk(4) Cpm(4)]=f_CalculCoeff_CT(P4, IT(4), Valeur_cible);
 
 [Pp(4) Ppk(4) Ppm(4)]=f_CalculCoeff_LT(IT(4), TS(4), TM(4), S4_lt, M(4), Valeur_cible); 
 
@@ -103,7 +103,7 @@ P = [P1 ; P2 ; P3 ; P4 ; P5];
 S8= std(P8);
 S8_lt = std(P) ;
 IT(8) = 5*max([S1 S2 S3 S4 S5 S6 S7 S8]);
-[S(8) M(8) TS(8) TM(8) Cp(8) Cpk(8) Cpm(8)]=f_CalculCoeff_CT(P(8), IT(8), Valeur_cible);
+[S(8) M(8) TS(8) TM(8) Cp(8) Cpk(8) Cpm(8)]=f_CalculCoeff_CT(P8, IT(8), Valeur_cible);
 
 
 [Pp(8) Ppk(8) Ppm(8)]=f_CalculCoeff_LT(IT(8), TS(8), TM(8), S8_lt, M(8), Valeur_cible); 
@@ -146,14 +146,15 @@ for i=1:9
     jbtest(Ptraitement(:,i))
 end 
 
+figure(1)
 boxplot(Ptraitement)
-
+title('Etudes statistiques des production') 
 %% Carte de Controle 
 %------------------------------------------------------------
 %% Carte de Shainin
 
 L=length(P1); 
-figure (1) 
+figure (2) 
 hold all 
 xlim=[0 L];
 
@@ -178,8 +179,10 @@ for i=1:9
   
     ylim=[0 max(Ptraitement(:,i))];
     plot([1:L], Ptraitement(:,i), '+b', [0 L], [M(i)+IT(i) M(i)+IT(i)], '-r', [0 L], [M(i)-IT(i) M(i)-IT(i)], '-r',...
-    [0 L],[M(i) M(i)], ':k', [0 L], [M(i)+IT(i)/2 M(i)+IT(i)/2], '-g', [0 L], [M(i)-IT(i)/2 M(i)-IT(i)/2],'-g');
+     [0 L],[Valeur_cible Valeur_cible], ':r',[0 L], [M(i)+IT(i)/2 M(i)+IT(i)/2], '-g', [0 L], [M(i)-IT(i)/2 M(i)-IT(i)/2],'-g');
+    
     str={'Production' i};
     xlabel(str) 
+    mean(P(i))
 end 
 
