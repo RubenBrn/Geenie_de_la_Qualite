@@ -186,3 +186,17 @@ for i=1:9
     mean(P(i))
 end 
 
+%Carte EWMA
+n=5;  		% 5 valeurs 
+L=3*sigma;    	% +- 3*sigma
+La=0.2; 	% lambda =0.2
+Mi(1)=Valeur_cible; 	% initialisation
+
+% calcul des limites de contr?le (5 echantillons)
+    LicMi=Valeur_cible-L*sigma*sqrt(La/(n*(2-La)));
+    LscMi=Valeur_cible+L*sigma*sqrt(La/(n*(2-La)));
+     Lics=-sigma;
+    Lscs=1.964*sigma;
+    
+Mi(u+1)= La*mean(val(:,u))+(1-La)*Mi(u);  		% calcul des Mi
+S(u)=std(val(:,u));                             % calcul ?cart type
