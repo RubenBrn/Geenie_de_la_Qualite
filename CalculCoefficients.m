@@ -94,7 +94,7 @@ IT(6) = 5*max([S1 S2 S3 S4 S5 S6]);
 [Pp(6) Ppk(6) Ppm(6)]=f_CalculCoeff_LT(IT(6), TS(6), TM(6), S6_lt, M(6), Valeur_cible);
 
 %% stade P7
-P = [P1 ; P2 ; P3 ; P4 ; P5];
+P = [P1 ; P2 ; P3 ; P4 ; P5 ; P6 ; P7];
 
 S7= std(P7);
 S7_lt = std(P) ;
@@ -104,7 +104,7 @@ IT(7) = 5*max([S1 S2 S3 S4 S5 S6 S7]);
 [Pp(7) Ppk(7) Ppm(7)]=f_CalculCoeff_LT(IT(7), TS(7), TM(7), S7_lt, M(7), Valeur_cible);
 
 %% stade P8
-P = [P1 ; P2 ; P3 ; P4 ; P5];
+P = [P1 ; P2 ; P3 ; P4 ; P5 ; P6 ; P7 ; P8 ];
 
 S8= std(P8);
 S8_lt = std(P) ;
@@ -199,7 +199,7 @@ figure(4)
 l=nb
 for i=1:9
  subplot(3,3,i)
- sigma=S(i);
+ sigma=S(i); %sigma global 
  L=3*sigma;
  Lics=-sigma;
  Lscs=1.964*sigma;
