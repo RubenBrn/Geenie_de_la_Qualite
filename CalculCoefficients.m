@@ -38,7 +38,7 @@ P = [P1];
 
 S1= std(P1); %std production locale (court-terme)
 S1_lt = std(P) ; %std long-terme
-IT(1) = 5*max([S1]); %5 fois le pire ecart type
+IT(1) = 5*std(P); %5 fois le pire ecart type
 [S(1) M(1) TS(1) TM(1) Cp(1) Cpk(1) Cpm(1)]=f_CalculCoeff_CT(P1, IT(1), Valeur_cible);
 %les coefficients courts termes sont calcules dans cette fonction
 [Pp(1) Ppk(1) Ppm(1)]=f_CalculCoeff_LT(IT(1), TS(1), TM(1), S1_lt, M(1), Valeur_cible);
@@ -49,7 +49,7 @@ P = [P1 ; P2];
 
 S2= std(P2); %CT
 S2_lt = std(P) ; %LT
-IT(2) = 5*max([S1 S2]);
+IT(2) = 5*std(P);
 [S(2) M(2) TS(2) TM(2) Cp(2) Cpk(2) Cpm(2)]=f_CalculCoeff_CT(P2, IT(2), Valeur_cible);
 
 [Pp(2) Ppk(2) Ppm(2)]=f_CalculCoeff_LT(IT(2), TS(2), TM(2), S2_lt, M(2), Valeur_cible);
