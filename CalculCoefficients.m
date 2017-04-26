@@ -181,25 +181,12 @@ end
 %% Carte EWMA
 
 La=0.2; 	% lambda =0.2
-% calcul des limites de contr?le (5 echantillons)
-%     sigma=std(M);
-%     L=3*sigma;
-%     Lics=-sigma;
-%     Lscs=1.964*sigma;
-%     % initialisation
-%       Mi(1)=Valeur_cible;
-%       LicMi(1)=Valeur_cible-L*sigma*sqrt(La/(nb*(2-La)));
-%       LscMi(1)=Valeur_cible+L*sigma*sqrt(La/(nb*(2-La)));
 
-    % boucle de recurence
-figure(4)
-
-%   title ('CARTE DE CONTROLE EWMA');
-
+figure(4) %carte de controle EWMA par production
 l=nb
 for i=1:9
  subplot(3,3,i)
- sigma=S(i); %sigma global 
+ sigma=S(i); %sigma global
  L=3*sigma;
  Lics=-sigma;
  Lscs=1.964*sigma;
@@ -224,6 +211,31 @@ for i=1:9
   hold off
 end
 
+figure(5)
+
+l=length(P);
+%initialisation
+sigma=std(P); %sigma global
+L=3*sigma;
+Lics=-sigma;
+Lscs=1.964*sigma;
+Mi(1)=Valeur_cible;
+
+LicMi(1)=Valeur_cible-L*sigma*sqrt(La/(nb*(2-La)));
+LscMi(1)=Valeur_cible+L*sigma*sqrt(La/(nb*(2-La)));
+
+for u=1:l
+      Mi(u+1)= La*(P(u))+(1-La)*Mi(u);  		% calcul des Mi
+      %S(u)=std(Ptraitement(:,u));    % calcul ?cart type
+
+      LicMi(u+1)=Valeur_cible-L*sigma*sqrt(La*(1-(1-La)^(2*u))/(nb*(2-La)));
+      LscMi(u+1)=Valeur_cible+L*sigma*sqrt(La*(1-(1-La)^(2*u))/(nb*(2-La)));
+end
+hold on
+plot(1:l, Mi(2:end), '-r')
+plot(1:l, LscMi(2:end), '-b', 1:l, LicMi(2:end), '-b');
+hold off
+
 %% Carte de Controle CUSUM
 
   %Determination de k et h
@@ -235,7 +247,7 @@ end
     % construction de la carte
 %valeur_cible
 sigma =S(9); %quelle valeur prendre ?
-
+l=14;
 sigma_X=sigma/(sqrt(nb));	% sigma pour 14 valeurs
 h=5;			% limite
 k=0.5;			% ??cart a d??tecter = 1 sigma
@@ -244,16 +256,18 @@ K=k*sigma_X;		% filtre
 
     SH(1)=0;  		% sommes initialis??es ?? 0
     SL(1)=0;
-    
-  figure(5)  
+
+  figure(6)
 for u=1:nb
 	SH(u+1)=max([0, mean(P9(u))-(Valeur_cible+K)+SH(u)]) ; 	% calcul somme ??????haute????
 	SL(u+1)=max([0, (Valeur_cible-K)-mean(P9(u))+SL(u)]) ;	% calcul  ???somme basse???
 end
 UCL=H;
 LCL=-H;
-    
+
 hold on
   plot(1:l, SH(2:end) , '-+r', [0 l], [UCL UCL], ':k');
-  plot(1:l, -SL(2:end), '-+b', [0 l], [LCL LCL], ':k'); 
+  plot(1:l, -SL(2:end), '-+b', [0 l], [LCL LCL], ':k');
 hold off
+
+figure(6)
