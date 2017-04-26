@@ -182,7 +182,7 @@ sigma_int=sqrt((MSO-MSOp)/n); %interactions
 sigma_repro=sqrt(sigma_operateurs^2+sigma_int^2); 
 sigma_instru=sqrt(sigma_repro^2+sigma_repe^2);
 
-IT=3*max([sigma_repe sigma_operateurs sigma_piece sigme_int sigma_repro sigma_instru]);
+IT=3*max([sigma_repe sigma_operateurs, sigma_piece, sigme_int, sigma_repro, sigma_instru);
 
 Cpc_anova=IT/(6*sigma_instru);
 
