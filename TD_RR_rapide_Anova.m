@@ -5,7 +5,7 @@ close all
 %% Premi?re production 
 
 %X1 Hugo sur les 3 balances - 
-%Denver Instrument précise à 0.1g, Hanson précise à 1g et Traveler Ohrus précise à 0.01g
+%Denver Instrument precise a 0.1g, Hanson precise a 1g et Traveler Ohrus precise a 0.01g
 X1 = [18.4	18.37	18
     11.6	11.64	12
     23.3	23.24	23
@@ -171,9 +171,9 @@ a=1+1; %nombre d'operateur
 b=14+1; %nombre de pieces
 n=64/(a*b);
 MSR=3.83e-05; %residu
-MSO=0.00279; %operateurs
-MSOp=0.00628; % intercation
-MSp=0.00321; %piece
+MSO=0.0001; %operateurs
+MSOp=1.023e-5; % interaction
+MSp=71.2928; %piece
 
 sigma_repe=sqrt(MSR); 
 sigma_operateurs=sqrt((MSO-MSOp)/(b*n));
@@ -182,7 +182,7 @@ sigma_int=sqrt((MSO-MSOp)/n); %interactions
 sigma_repro=sqrt(sigma_operateurs^2+sigma_int^2); 
 sigma_instru=sqrt(sigma_repro^2+sigma_repe^2);
 
-IT=3*max([sigma_repe sigma_operateurs sigma_piece sigme_int sigma_repro sigma_instru]);
+IT=3*max([sigma_repe sigma_operateurs sigma_piece sigma_int sigma_repro sigma_instru]);
 
 Cpc_anova=IT/(6*sigma_instru);
 

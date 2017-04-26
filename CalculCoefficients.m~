@@ -198,24 +198,7 @@ hold off
 
 %% Carte de controle aux etendues glissantes
 
-l=length(P);
-
-for u=3:l
-    %valeurs individuelles 
-        %rien a calculer
-        
-    %etendues glissantes 
-    R(u)=range([P(u), P(u-1), P(u-2)]); 
-    Val(u)=mean([P(u), P(u-1), P(u-2)]); 
-end
-figure(9)
-hold on
-subplot(2,1,1)
-plot([3:l], R(3:l));
-
-subplot(2,1,2)
-plot([3:l], Val(3:l));
-
+P(u), P
 %% Carte de Shainin
 
 %carte de controle pour l'operateur
